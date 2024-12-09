@@ -1,0 +1,46 @@
+.HistoryOfStarcraft{
+    height: auto;
+    width: auto;
+    /*background-color: #0c0627;*/
+    background-image: url('https://img.freepik.com/free-photo/black-textured-paper-background_53876-143073.jpg?t=st=1733232720~exp=1733236320~hmac=5843dc8e1daf494d35c4fab551f2145d2a8e217e8b77044f711f0e7ddd46cbd0&w=1380');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    text-align: center; /* Центрирование текста */
+    padding: 40px 20px;
+}
+
+.history-content {
+    display: flex;
+    flex-wrap: wrap; /* Разрешаем перенос строк */
+    justify-content: center; /* Центровка содержимого */
+    gap: 50px; /* Расстояние между элементами */
+}
+
+.item {
+    flex: 0 1 calc(45% - 20px); /* Задаём ширину для боковых элементов */
+    background-color: transparent; /* Без фона у отдельных блоков */
+    margin-bottom: 30px; /* Отступ между строками */
+}
+
+.item:nth-child(3) {
+    flex: 0 1 calc(90% - 20px); /* Центральный блок занимает больше ширины */
+}
+
+.block-title_History {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff; /* Белый цвет текста */
+}
+
+.block-subtitle_History {
+    word-wrap: break-word; /* Разрешает переносить длинные слова */
+    white-space: normal;
+    font-size: 16px;
+    color: #9cb8ec; /* Цвет подзаголовков */
+    margin-bottom: 10px; /* Отступы между элементами */
+    width: 80%; /* Уменьшение ширины текста */
+    margin-left: auto;
+    margin-right: auto;
+}

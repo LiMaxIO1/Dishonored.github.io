@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration and Login</title>
+    <link rel="icon" type="image/png" href="pngegg (2).png"> 
+    <style>
+        :root {
+            --blur: 10px;
+            --background-color: rgba(0, 0, 0, 0.5);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+        }
+        .Registr {
+            position: relative;
+            backdrop-filter: blur(var(--blur));
+            background: var(--background-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 300px;
+        }
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .registration-form input,
+        .registration-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: var(--border-color);
+            color: white;
+            transition: background 0.3s;
+        }
+        .registration-form input:focus,
+        .registration-form button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .registration-form button {
+            cursor: pointer;
+        }
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .toggle-buttons button {
+            margin: 0 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: var(--border-color);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-buttons button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            color: #ffd700;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<a href="Starcraft.html" class="back-link">Home</a> <!-- Кнопка-ссылка -->
+<div class="Registr">
+    <div class="toggle-buttons">
+        <button id="registerBtn">Регистрация</button>
+        <button id="loginBtn">Войти</button>
+    </div>
+    <form class="registration-form" id="authForm">
+        <h2 id="formTitle">Регистрация</h2>
+        <input type="text" id="nameInput" placeholder="Имя" required>
+        <input type="email" id="emailInput" placeholder="Email" required>
+        <input type="password" id="passwordInput" placeholder="Пароль" required>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <div class="floating-square"></div>
+    <div class="floating-square"></div>
+    <div class="floating-square"></div>
+</div>
+
+<script>
+    const registerBtn = document.getElementById('registerBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const formTitle = document.getElementById('formTitle');
+    const authForm = document.getElementById('authForm');
+    const emailInput = document.getElementById('emailInput');
+    const nameInput = document.getElementById('nameInput');
+    const passwordInput = document.getElementById('passwordInput');
+
+    registerBtn.addEventListener('click', () => {
+        formTitle.textContent = 'Регистрация';
+        emailInput.style.display = 'block';
+        authForm.lastElementChild.textContent = 'Зарегистрироваться';
+    });
+
+    loginBtn.addEventListener('click', () => {
+        formTitle.textContent = 'Войти';
+        emailInput.style.display = 'none';
+        authForm.lastElementChild.textContent = 'Войти';
+    });
+
+    authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (formTitle.textContent === 'Войти' && nameInput.value === 'Админ' && passwordInput.value === 'Я главный') {
+            window.location.href = 'Starcraft.html'; // Ссылка на страницу админа
+        } else {
+            window.location.href = 'Starcraft.html'; // Ссылка на домашнюю страницу
+        }
+    });
+</script>
+
+</body>
+</html>

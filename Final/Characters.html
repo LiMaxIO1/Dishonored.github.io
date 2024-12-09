@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="pngegg (2).png"> 
+    <title>Characters</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('photo2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Оставляет фон на заднем плане */
+        }
+
+        .overlay {
+            position: relative;
+            background-color: rgb(14, 14, 20, 0.9); /* Прозрачный фон для эффекта наложения */
+            width: 100%;
+            height: 50vh; /* Новый блок перекрывает только половину фона */
+            z-index: 1;
+            transform: translateY(100%);
+            animation: center-position 2s ease-out forwards; /* Используем одну анимацию */
+            display: flex;
+            align-items: center; /* Центрирует иконки вертикально */
+            justify-content: center; /* Центрирует иконки горизонтально */
+        }
+
+        /* Чистая анимация подъема в центр */
+        @keyframes center-position {
+            0% {
+                transform: translateY(100%); /* Начинаем за пределами экрана */
+            }
+            100% {
+                transform: translateY(25vh); /* Останавливаемся в центре */
+            }
+        }
+
+        .carousel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 80%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .carousel-item {
+            min-width: 20%; /* Пять элементов видимы одновременно */
+            text-align: center;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            border-radius: 50%; /* Делает иконки круглыми */
+            border: 2px solid #ccc; /* Добавляет границу для лучшего визуального эффекта */
+            transition: transform 0.3s ease; /* Плавное увеличение */
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.2); /* Увеличиваем иконку при наведении */
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            z-index: 2;
+        }
+
+        .carousel-button.prev {
+            left: 0;
+        }
+
+        .carousel-button.next {
+            right: 0;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            color: #ffd700;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <a href="Starcraft.html" class="back-link">Home</a> <!-- Кнопка-ссылка -->
+    <div class="background"></div>
+    <div class="overlay">
+        <div class="carousel">
+            <button class="carousel-button prev">&#10094;</button>
+            <div class="carousel-track">
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (2).png" alt="Icon 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (3).png" alt="Icon 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (4).png" alt="Icon 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (5).png" alt="Icon 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (6).png" alt="Icon 5">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (7).png" alt="Icon 6">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (8).png" alt="Icon 7">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (9).png" alt="Icon 8">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (2).png" alt="Icon 9">
+                </div>
+                <div class="carousel-item">
+                    <img src="CharactersPhoto/pngegg (3).png" alt="Icon 10">
+                </div>
+            </div>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track.children);
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        const itemWidth = items[0].getBoundingClientRect().width;
+
+        // Клонируем элементы для бесшовной прокрутки
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const offset = -(currentIndex * itemWidth);
+            track.style.transform = `translateX(${offset}px)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = items.length - 1;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${(items.length - 1) * itemWidth}px)`;
+                requestAnimationFrame(() => {
+                    track.style.transition = 'transform 0.5s ease';
+                    currentIndex--;
+                    updateCarousel();
+                });
+            } else {
+                updateCarousel();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex >= items.length) {
+                currentIndex = 0;
+                track.style.transition = 'none';
+                track.style.transform = 'translateX(0px)';
+                requestAnimationFrame(() => {
+                    track.style.transition = 'transform 0.5s ease';
+                    currentIndex++;
+                    updateCarousel();
+                });
+            } else {
+                updateCarousel();
+            }
+        });
+
+        updateCarousel();
+    </script>
+</body>
+</html>
